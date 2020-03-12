@@ -51,7 +51,7 @@ jar {
 
 repositories {
     mavenCentral()
-    maven { url "http://repo.spring.io/milestone" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencyManagement {
