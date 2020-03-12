@@ -1,8 +1,8 @@
 buildscript {
     repositories {
         jcenter()
-        mavenCentral()
-       // maven { url "https://repo1.maven.org/maven2" }
+        //mavenCentral()
+        maven { url "https://repo1.maven.org/maven2" }
     }
 
     dependencies {
@@ -50,8 +50,8 @@ jar {
 }
 
 repositories {
-    mavenCentral()
- //   maven { url "https://repo1.maven.org/maven2" }
+    // mavenCentral()
+    maven { url "https://repo1.maven.org/maven2" }
 }
 
 dependencyManagement {
@@ -75,8 +75,8 @@ dependencies {
     compile "org.springframework.data:spring-data-mongodb"
 
     // JPA Persistence
-    // compile "commons-dbcp:commons-dbcp"
-    compile "org.apache.commons:commons-dbcp2:2.7.0"
+    compile "commons-dbcp:commons-dbcp"
+    //compile "org.apache.commons:commons-dbcp2:2.7.0"
     compile "org.hibernate:hibernate-entitymanager"
     runtime "com.h2database:h2"
     runtime "mysql:mysql-connector-java"
