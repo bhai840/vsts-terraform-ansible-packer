@@ -12,8 +12,8 @@ pool:
 steps:
 - task: Gradle@2
   inputs:
-    #workingDirectory: ''
-    #gradleWrapperFile: 'gradlew'
+    workingDirectory: 'web'
+    gradleWrapperFile: 'web/gradlew'
     gradleOptions: '-Xmx3072m'
     #javaHomeOption: 'JDKVersion'
     Set JAVA_HOME by: 'JDKVersion'
@@ -23,19 +23,34 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'build'
-
 - task: CopyFiles@2
-  displayName: 'Copy ansible, packer, terraform files'
+  displayName: 'Copy Files'
   inputs:
-    SourceFolder: '$(Build.SourceDirectory)'
+    SourceFolder: '$(build.sourcesdirectory)'
     Contents: |
      ansible/**
      packer/**
      terraform/**
-    TargetFolder: $(Build.ArtifactStagingDirectory)
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    CleanTargetFolder: true
+    OverWrite: true
+    flattenFolders: true
+    preserveTimestamp: true
+  condition: succeededOrFailed()
+
 - task: CopyFiles@2
-  displayName: 'Copy war files'
+  displayName: 'Copy war file'
   inputs:
-    SourceFolder: '$(Build.SourceDirectory)'
-    Contents: "**/*.war"
-    TargetFolder: $(Build.ArtifactStagingDirectory)
+    SourceFolder: '$(build.sourcesdirectory)'
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: webapp'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: webapp
+  condition: succeededOrFailed()
+  
+
