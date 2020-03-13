@@ -19,7 +19,7 @@ steps:
     Set JAVA_HOME by: 'JDKVersion'
     JDK path: '/usr/lib/jvm/java-8-openjdk-amd64'
     jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x86'
+    #jdkArchitectureOption: 'x86'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'build'
