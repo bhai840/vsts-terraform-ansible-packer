@@ -35,7 +35,7 @@ steps:
     TargetFolder: '$(build.artifactstagingdirectory)'
     CleanTargetFolder: true
     OverWrite: true
-    flattenFolders: true
+    #flattenFolders: true
     preserveTimestamp: true
   condition: succeededOrFailed()
 
