@@ -10,7 +10,7 @@ provider "azurerm" {}
 # Create a resource group if it doesn’t exist
 resource "azurerm_resource_group" "demo_resource_group" {
   name     = "packerdemocreate"
-  location = "Canada Central"
+  location = "South Central US"
 
   tags {
     environment = "Packer Demo"
@@ -150,7 +150,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   upgrade_policy_mode = "Automatic"
 
   sku {
-    name     = "Standard_DS1_v2"
+    name     = "Standard_B2s"
     tier     = "Standard"
     capacity = 2
   }
@@ -167,7 +167,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   }
 
   os_profile {
-    computer_name_prefix = "myvm"
+    computer_name_prefix = "myazurevm"
     admin_username       = "azureuser"
     admin_password       = "Passwword1234"
   }
@@ -177,7 +177,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
     ssh_keys {
       path     = "/home/azureuser/.ssh/authorized_keys"
-      key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDzWnLrGQrrR/1ghPRWzRVGLi64vMv+h+Wqx1BbgjHBUJd+TmJwrt8jJn7g/lMt9v2nkPU31B5iFeJJei5E/ShPAhxss4N5/J4fP6Uxq3iXcDC9LdC3P4wdQh5bxTYN1ruQtPpmyTPrLpfK++SPu42pAiAoAWdiw7s/WXLzxNALWsl2zrpNqTK9OdrDWmDFeu7PzVGxJ3cPEhPHfxzBTmj87vN5obSGr7uHrmtDwX5+5l6UscyWLdC6q6Wbk/SW8bICfccXJua3yddtXb5sx8jSivo99qusSpE8uUrpzFz9XFlARJQWtO0fsZKnK+yxZktcGNh8FvI89AU7iW4A180z lenisha@Terraform"
+      key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfH3QKzCNJUHswZqPD5MpahtHTcsDeFLn9Dyf6fIqPy95BA+3aO9R9YkwrgEHgVGEIjhGghqqIp4Y5y9eclp1Z33WdNgT2PXnStOPFVxaO1nqbYWzhJ83F14XIpiKd3Cgz46AsFAom42ddJByNW2OY/9tRcvJI9klSYE0Vkoh7hSwCer+1ZEH4cmmeJG5CiYW9Nrh4UVdLtHJFn/9sHGW/Gy7D/hZjrMct5XZLnUcQJVsrq7D2ZmGCxWSAdDB3Uy+Y3eJT6+znPvwLt98HqGqSyBugjhsw84dUQv9A8P4rfGYXwR2Ik+ajuD9oXiH9JkB5FOcLEpHwEh9ja9O/Rc9j ubuntu@ip-172-31-31-126"
     }
   }
 
