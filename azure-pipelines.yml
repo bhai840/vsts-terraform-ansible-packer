@@ -39,12 +39,12 @@ steps:
     preserveTimestamp: true
   condition: succeededOrFailed()
   
-- task: CmdLine@2
-  inputs:
-    script: |
-     chmod +x packer/*.sh
-     chmod +x terraform/*.sh 
-    workingDirectory: '$(build.artifactstagingdirectory)'
+#- task: CmdLine@2
+  #inputs:
+    #script: |
+     #chmod +x packer/*.sh
+     #chmod +x terraform/*.sh 
+    #workingDirectory: '$(build.artifactstagingdirectory)'
     #failOnStderr: false # Optional
 
 - task: CopyFiles@2
