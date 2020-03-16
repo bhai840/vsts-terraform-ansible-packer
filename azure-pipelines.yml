@@ -38,6 +38,14 @@ steps:
     #flattenFolders: true
     preserveTimestamp: true
   condition: succeededOrFailed()
+  
+- task: CmdLine@2
+  inputs:
+    script: |
+     chmod +x packer/*.sh
+     chmod +x terraform/*.sh 
+    workingDirectory: '$(build.artifactstagingdirectory)'
+    #failOnStderr: false # Optional
 
 - task: CopyFiles@2
   displayName: 'Copy war file'
