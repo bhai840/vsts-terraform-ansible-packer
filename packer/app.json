@@ -25,7 +25,7 @@
     "managed_image_name": "demoPackerImage-{{isotime \"2006-01-02_03_04_05\"}}",
 
     "location": "South Central US",
-    "vm_size": "Basic_A1"
+    "vm_size": "Basic_A2"
   }],
   "provisioners": [
     {
