@@ -45,7 +45,7 @@ resource "azurerm_public_ip" "demo_public_ip" {
   name                         = "packerpublicip"
   location                     = "azurerm_resource_group.demo_resource_group.location"
   resource_group_name          = "azurerm_resource_group.demo_resource_group.name"
-  allocation_method            = "static"
+  allocation_method            = "Static"
   domain_name_label            = "demopackeriac"
 
   tags = {
