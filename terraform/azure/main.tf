@@ -83,7 +83,7 @@ resource "azurerm_lb" "vmss_lb" {
 
   frontend_ip_configuration  {
     name                 = "PublicIPAddress"
-    public_ip_address_id = "azurerm_public_ip.demo_public_ip.id"
+    #public_ip_address_id = "azurerm_public_ip.demo_public_ip.id"
   }
 
   tags = {
@@ -128,7 +128,7 @@ resource "random_id" "randomid" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "demo_storage_account" {
-  name                     = "diag.random_id.randomid.hex"
+  name                     = "random_id.randomid.hex"
   resource_group_name      = "azurerm_resource_group.demo_resource_group.name"
   location                 = "azurerm_resource_group.demo_resource_group.location"
   account_tier             = "Standard"
