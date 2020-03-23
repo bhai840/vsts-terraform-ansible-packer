@@ -1,4 +1,4 @@
-storage_account_name = "newmilan"
+storage_account_name = "terraformstorage"
 
 container_name = "terraform-state"
 
