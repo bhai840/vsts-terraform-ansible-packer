@@ -21,8 +21,8 @@ resource "azurerm_resource_group" "demo_resource_group" {
 resource "azurerm_virtual_network" "demo_virtual_network" {
   name                = "packerdemo"
   address_space       = ["10.0.0.0/16"]
-  location            = "${azurerm_resource_group.demo_resource_group.location}"
-  resource_group_name = "${azurerm_resource_group.demo_resource_group.name}"
+  location            = "azurerm_resource_group.demo_resource_group.location"
+  resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
   tags {
     environment = "Packer Demo"
@@ -32,16 +32,16 @@ resource "azurerm_virtual_network" "demo_virtual_network" {
 # Create subnet
 resource "azurerm_subnet" "demo_subnet" {
   name                 = "packerdemo"
-  resource_group_name  = "${azurerm_resource_group.demo_resource_group.name}"
-  virtual_network_name = "${azurerm_virtual_network.demo_virtual_network.name}"
+  resource_group_name  = "azurerm_resource_group.demo_resource_group.name"
+  virtual_network_name = "azurerm_virtual_network.demo_virtual_network.name"
   address_prefix       = "10.0.1.0/24"
 }
 
 # Create public IPs
 resource "azurerm_public_ip" "demo_public_ip" {
   name                         = "packerpublicip"
-  location                     = "${azurerm_resource_group.demo_resource_group.location}"
-  resource_group_name          = "${azurerm_resource_group.demo_resource_group.name}"
+  location                     = "azurerm_resource_group.demo_resource_group.location"
+  resource_group_name          = "azurerm_resource_group.demo_resource_group.name"
   public_ip_address_allocation = "static"
   domain_name_label            = "demopackeriac"
 
@@ -53,8 +53,8 @@ resource "azurerm_public_ip" "demo_public_ip" {
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "demo_security_group" {
   name                = "packersecuritygroups"
-  location            = "${azurerm_resource_group.demo_resource_group.location}"
-  resource_group_name = "${azurerm_resource_group.demo_resource_group.name}"
+  location            = "azurerm_resource_group.demo_resource_group.location"
+  resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
   security_rule {
     name                       = "HTTP"
@@ -75,12 +75,12 @@ resource "azurerm_network_security_group" "demo_security_group" {
 
 resource "azurerm_lb" "vmss_lb" {
   name                = "vmss-lb"
-  location            = "${azurerm_resource_group.demo_resource_group.location}"
-  resource_group_name = "${azurerm_resource_group.demo_resource_group.name}"
+  location            = "azurerm_resource_group.demo_resource_group.location"
+  resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
-    public_ip_address_id = "${azurerm_public_ip.demo_public_ip.id}"
+    public_ip_address_id = "azurerm_public_ip.demo_public_ip.id"
   }
 
   tags {
@@ -89,35 +89,35 @@ resource "azurerm_lb" "vmss_lb" {
 }
 
 resource "azurerm_lb_backend_address_pool" "bpepool" {
-  resource_group_name = "${azurerm_resource_group.demo_resource_group.name}"
-  loadbalancer_id     = "${azurerm_lb.vmss_lb.id}"
+  resource_group_name = "azurerm_resource_group.demo_resource_group.name"
+  loadbalancer_id     = "azurerm_lb.vmss_lb.id"
   name                = "BackEndAddressPool"
 }
 
 resource "azurerm_lb_probe" "vmss_probe" {
-  resource_group_name = "${azurerm_resource_group.demo_resource_group.name}"
-  loadbalancer_id     = "${azurerm_lb.vmss_lb.id}"
+  resource_group_name = "azurerm_resource_group.demo_resource_group.name"
+  loadbalancer_id     = "azurerm_lb.vmss_lb.id"
   name                = "ssh-running-probe"
   port                = "8080"
 }
 
 resource "azurerm_lb_rule" "lbnatrule" {
-  resource_group_name            = "${azurerm_resource_group.demo_resource_group.name}"
-  loadbalancer_id                = "${azurerm_lb.vmss_lb.id}"
+  resource_group_name            = "azurerm_resource_group.demo_resource_group.name"
+  loadbalancer_id                = "azurerm_lb.vmss_lb.id"
   name                           = "http"
   protocol                       = "Tcp"
   frontend_port                  = "80"
   backend_port                   = "8080"
-  backend_address_pool_id        = "${azurerm_lb_backend_address_pool.bpepool.id}"
+  backend_address_pool_id        = "azurerm_lb_backend_address_pool.bpepool.id"
   frontend_ip_configuration_name = "PublicIPAddress"
-  probe_id                       = "${azurerm_lb_probe.vmss_probe.id}"
+  probe_id                       = "azurerm_lb_probe.vmss_probe.id"
 }
 
 # Generate random text for a unique storage account name
 resource "random_id" "randomId" {
   keepers = {
     # Generate a new ID only when a new resource group is defined
-    resource_group = "${azurerm_resource_group.demo_resource_group.name}"
+    resource_group = "azurerm_resource_group.demo_resource_group.name"
   }
 
   byte_length = 8
@@ -125,9 +125,9 @@ resource "random_id" "randomId" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "demo_storage_account" {
-  name                     = "diag${random_id.randomId.hex}"
-  resource_group_name      = "${azurerm_resource_group.demo_resource_group.name}"
-  location                 = "${azurerm_resource_group.demo_resource_group.location}"
+  name                     = "diag.random_id.randomId.hex"
+  resource_group_name      = "azurerm_resource_group.demo_resource_group.name"
+  location                 = "azurerm_resource_group.demo_resource_group.location"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
@@ -138,15 +138,15 @@ resource "azurerm_storage_account" "demo_storage_account" {
 
 # Points to Packer build image 
 data "azurerm_image" "image" {
-  name                = "${var.manageddiskname}"
-  resource_group_name = "${var.manageddiskname-rg}"
+  name                = "var.manageddiskname"
+  resource_group_name = "var.manageddiskname-rg"
 }
 
 # Create virtual machine sclae set
 resource "azurerm_virtual_machine_scale_set" "vmss" {
   name                = "vmscaleset"
-  location            = "${azurerm_resource_group.demo_resource_group.location}"
-  resource_group_name = "${azurerm_resource_group.demo_resource_group.name}"
+  location            = "azurerm_resource_group.demo_resource_group.location"
+  resource_group_name = "azurerm_resource_group.demo_resource_group.name"
   upgrade_policy_mode = "Automatic"
 
   sku {
@@ -156,7 +156,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   }
 
   storage_profile_image_reference {
-    id = "${data.azurerm_image.image.id}"
+    id = "data.azurerm_image.image.id"
   }
 
   storage_profile_os_disk {
@@ -187,8 +187,8 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
     ip_configuration {
       name                                   = "IPConfiguration"
-      subnet_id                              = "${azurerm_subnet.demo_subnet.id}"
-      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
+      subnet_id                              = "azurerm_subnet.demo_subnet.id"
+      load_balancer_backend_address_pool_ids = ["azurerm_lb_backend_address_pool.bpepool.id"]
     }
   }
 
@@ -202,5 +202,5 @@ output "vm_ip" {
 }
 
 output "vm_dns" {
-  value = "http://${azurerm_public_ip.demo_public_ip.domain_name_label}.canadacentral.cloudapp.azure.com"
+  value = "http://azurerm_public_ip.demo_public_ip.domain_name_label.SouthCentralUS.cloudapp.azure.com"
 }
