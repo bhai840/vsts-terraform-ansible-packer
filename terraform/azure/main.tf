@@ -45,7 +45,7 @@ resource "azurerm_public_ip" "demo_public_ip" {
   name                         = "packerpublicip"
   location                     = "azurerm_resource_group.demo_resource_group.location"
   resource_group_name          = "azurerm_resource_group.demo_resource_group.name"
-  public_ip_address_allocation = "static"
+  allocation_method            = "static"
   domain_name_label            = "demopackeriac"
 
   tags = {
@@ -59,7 +59,7 @@ resource "azurerm_network_security_group" "demo_security_group" {
   location            = "azurerm_resource_group.demo_resource_group.location"
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
-  security_rule = {
+  security_rule {
     name                       = "HTTP"
     priority                   = 1002
     direction                  = "Inbound"
