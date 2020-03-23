@@ -1,4 +1,4 @@
-storage_account_name = "terraformstorage"
+storage_account_name = "terraformstorage2020"
 
 container_name = "terraform-state"
 
