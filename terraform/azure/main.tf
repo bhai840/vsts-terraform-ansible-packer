@@ -81,7 +81,7 @@ resource "azurerm_lb" "vmss_lb" {
   location            = "azurerm_resource_group.demo_resource_group.location"
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
-  frontend_ip_configuration = {
+  frontend_ip_configuration  {
     name                 = "PublicIPAddress"
     public_ip_address_id = "azurerm_public_ip.demo_public_ip.id"
   }
@@ -134,7 +134,7 @@ resource "azurerm_storage_account" "demo_storage_account" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
-  tags {
+  tags = {
     environment = "Terraform Demo"
   }
 }
@@ -190,18 +190,19 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
     ip_configuration {
       name                                   = "IPConfiguration"
+      primary                                = true
       subnet_id                              = "azurerm_subnet.demo_subnet.id"
       load_balancer_backend_address_pool_ids = ["azurerm_lb_backend_address_pool.bpepool.id"]
     }
   }
 
-  tags {
+  tags = {
     environment = "Terraform Demo"
   }
 }
 
 output "vm_ip" {
-  value = "${azurerm_public_ip.demo_public_ip.ip_address}"
+  value = "azurerm_public_ip.demo_public_ip.ip_address"
 }
 
 output "vm_dns" {
