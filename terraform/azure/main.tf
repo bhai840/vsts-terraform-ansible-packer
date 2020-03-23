@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "demo_resource_group" {
   name     = "packerdemocreate"
   location = "South Central US"
 
-  tags {
+  tags = {
     environment = "Packer Demo"
   }
 }
@@ -27,7 +27,7 @@ resource "azurerm_virtual_network" "demo_virtual_network" {
   location            = "azurerm_resource_group.demo_resource_group.location"
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
-  tags {
+  tags = {
     environment = "Packer Demo"
   }
 }
@@ -48,7 +48,7 @@ resource "azurerm_public_ip" "demo_public_ip" {
   public_ip_address_allocation = "static"
   domain_name_label            = "demopackeriac"
 
-  tags {
+  tags = {
     environment = "Packer Demo"
   }
 }
@@ -59,7 +59,7 @@ resource "azurerm_network_security_group" "demo_security_group" {
   location            = "azurerm_resource_group.demo_resource_group.location"
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
-  security_rule {
+  security_rule = {
     name                       = "HTTP"
     priority                   = 1002
     direction                  = "Inbound"
@@ -71,7 +71,7 @@ resource "azurerm_network_security_group" "demo_security_group" {
     destination_address_prefix = "*"
   }
 
-  tags {
+  tags = {
     environment = "Packer Demo"
   }
 }
@@ -81,12 +81,12 @@ resource "azurerm_lb" "vmss_lb" {
   location            = "azurerm_resource_group.demo_resource_group.location"
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
 
-  frontend_ip_configuration {
+  frontend_ip_configuration = {
     name                 = "PublicIPAddress"
     public_ip_address_id = "azurerm_public_ip.demo_public_ip.id"
   }
 
-  tags {
+  tags = {
     environment = "Terraform Demo"
   }
 }
