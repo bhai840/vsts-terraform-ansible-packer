@@ -7,7 +7,7 @@ variable "project" {
 }
 
 variable "manageddiskname-rg" {
-  default = "manageddiskname"
+  default = "managed-images2020"
 }
 
 variable "baked_image_url" {
