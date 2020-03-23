@@ -117,7 +117,7 @@ resource "azurerm_lb_rule" "lbnatrule" {
 }
 
 # Generate random text for a unique storage account name
-resource "random_id" "randomId" {
+resource "random_id" "randomid" {
   keepers = {
     # Generate a new ID only when a new resource group is defined
     resource_group = "azurerm_resource_group.demo_resource_group.name"
@@ -128,7 +128,7 @@ resource "random_id" "randomId" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "demo_storage_account" {
-  name                     = "diag.random_id.randomId.hex"
+  name                     = "diag.random_id.randomid.hex"
   resource_group_name      = "azurerm_resource_group.demo_resource_group.name"
   location                 = "azurerm_resource_group.demo_resource_group.location"
   account_tier             = "Standard"
