@@ -83,7 +83,7 @@ resource "azurerm_lb" "vmss_lb" {
 
   frontend_ip_configuration  {
     name                 = "PublicIPAddress"
-    #public_ip_address_id = "azurerm_public_ip.demo_public_ip.id"
+    public_ip_address_id = azurerm_public_ip.demo_public_ip.id
   }
 
   tags = {
@@ -93,13 +93,13 @@ resource "azurerm_lb" "vmss_lb" {
 
 resource "azurerm_lb_backend_address_pool" "bpepool" {
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
-  #loadbalancer_id     = "azurerm_lb.vmss_lb.id"
+  loadbalancer_id     = azurerm_lb.vmss_lb.id
   name                = "BackEndAddressPool"
 }
 
 resource "azurerm_lb_probe" "vmss_probe" {
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
-  #loadbalancer_id     = "azurerm_lb.vmss_lb.id"
+  loadbalancer_id     = azurerm_lb.vmss_lb.id
   name                = "ssh-running-probe"
   port                = "8080"
 }
@@ -111,7 +111,7 @@ resource "azurerm_lb_rule" "lbnatrule" {
   protocol                       = "Tcp"
   frontend_port                  = "80"
   backend_port                   = "8080"
- #backend_address_pool_id        = "azurerm_lb_backend_address_pool.bpepool.id"
+  backend_address_pool_id        = azurerm_lb_backend_address_pool.bpepool.id
   frontend_ip_configuration_name = "PublicIPAddress"
   probe_id                       = "azurerm_lb_probe.vmss_probe.id"
 }
@@ -191,7 +191,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
     ip_configuration {
       name                                   = "IPConfiguration"
       primary                                = true
-      subnet_id                              = "azurerm_subnet.demo_subnet.id"
+      subnet_id                              = azurerm_subnet.demo_subnet.id
       load_balancer_backend_address_pool_ids = ["azurerm_lb_backend_address_pool.bpepool.id"]
     }
   }
@@ -202,7 +202,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 }
 
 output "vm_ip" {
-  value = "azurerm_public_ip.demo_public_ip.ip_address"
+  value = azurerm_public_ip.demo_public_ip.ip_address
 }
 
 output "vm_dns" {
