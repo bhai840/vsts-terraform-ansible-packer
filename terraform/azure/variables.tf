@@ -7,7 +7,7 @@ variable "project" {
 }
 
 variable "manageddiskname_rg" {
-  default = "managed-images2020"
+  default = "manageddiskname"    #this is the resource group where packers image resides
 }
 
 variable "baked_image_url" {
@@ -15,5 +15,5 @@ variable "baked_image_url" {
 }
 
 variable "manageddiskname" {
-  default = "demoPackerImage-2020-03-24_04_40_17"
+  default = ""
 }
