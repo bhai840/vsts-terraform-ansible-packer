@@ -128,7 +128,7 @@ resource "random_id" "storage" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "demo_storage_account" {
-  name                     = "random_id.storage.hex"
+  name                     =  random_id.storage.hex
   resource_group_name      = "azurerm_resource_group.demo_resource_group.name"
   location                 = "azurerm_resource_group.demo_resource_group.location"
   account_tier             = "Standard"
