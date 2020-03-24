@@ -141,7 +141,7 @@ resource "azurerm_storage_account" "demo_storage_account" {
 
 # Points to Packer build image 
 data "azurerm_image" "image" {
-  name_regex          =  var.manageddiskname
+  name                =  var.manageddiskname
   resource_group_name =  var.manageddiskname_rg
 }
 output "image_id" {
