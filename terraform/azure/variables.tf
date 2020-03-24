@@ -6,7 +6,7 @@ variable "project" {
   default = "terraform-ansible-demo"
 }
 
-variable "manageddiskname-rg" {
+variable "manageddiskname_rg" {
   default = "managed-images2020"
 }
 
