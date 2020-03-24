@@ -15,5 +15,5 @@ variable "baked_image_url" {
 }
 
 variable "manageddiskname" {
-  default = "demoPackerImage-formatdate("YYYY-MM-DD_hh_mm_ss", timestamp())"
+  default = "demoPackerImage-formatdate('YYYY-MM-DD_hh_mm_ss', timestamp())"
 }
