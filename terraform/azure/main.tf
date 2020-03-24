@@ -202,7 +202,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 }
 
 output "vm_ip" {
-  value = azurerm_public_ip.demo_public_ip.ip_address
+  value = azurerm_public_ip.demo_public_ip.allocation_method
 }
 
 output "vm_dns" {
