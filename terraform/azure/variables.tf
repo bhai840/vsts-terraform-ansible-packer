@@ -15,5 +15,5 @@ variable "baked_image_url" {
 }
 
 variable "manageddiskname" {
-  default = ""
+  default = "demoPackerImage-{{isotime \"2006-01-02_03_04_05\"}}"
 }
