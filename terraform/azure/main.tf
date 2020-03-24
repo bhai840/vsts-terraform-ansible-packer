@@ -93,13 +93,13 @@ resource "azurerm_lb" "vmss_lb" {
 
 resource "azurerm_lb_backend_address_pool" "bpepool" {
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
-  loadbalancer_id     = "azurerm_lb.vmss_lb.id"
+  #loadbalancer_id     = "azurerm_lb.vmss_lb.id"
   name                = "BackEndAddressPool"
 }
 
 resource "azurerm_lb_probe" "vmss_probe" {
   resource_group_name = "azurerm_resource_group.demo_resource_group.name"
-  loadbalancer_id     = "azurerm_lb.vmss_lb.id"
+  #loadbalancer_id     = "azurerm_lb.vmss_lb.id"
   name                = "ssh-running-probe"
   port                = "8080"
 }
@@ -111,13 +111,13 @@ resource "azurerm_lb_rule" "lbnatrule" {
   protocol                       = "Tcp"
   frontend_port                  = "80"
   backend_port                   = "8080"
-  backend_address_pool_id        = "azurerm_lb_backend_address_pool.bpepool.id"
+ #backend_address_pool_id        = "azurerm_lb_backend_address_pool.bpepool.id"
   frontend_ip_configuration_name = "PublicIPAddress"
   probe_id                       = "azurerm_lb_probe.vmss_probe.id"
 }
 
 # Generate random text for a unique storage account name
-resource "random_id" "randomid" {
+resource "random_id" "storage" {
   keepers = {
     # Generate a new ID only when a new resource group is defined
     resource_group = "azurerm_resource_group.demo_resource_group.name"
@@ -128,7 +128,7 @@ resource "random_id" "randomid" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "demo_storage_account" {
-  name                     = "random_id.randomid.hex"
+  name                     = "random_id.storage.hex"
   resource_group_name      = "azurerm_resource_group.demo_resource_group.name"
   location                 = "azurerm_resource_group.demo_resource_group.location"
   account_tier             = "Standard"
