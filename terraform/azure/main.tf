@@ -141,8 +141,11 @@ resource "azurerm_storage_account" "demo_storage_account" {
 
 # Points to Packer build image 
 data "azurerm_image" "image" {
-  name                =  var.manageddiskname
+  name                =  "search-api" #var.manageddiskname
   resource_group_name =  var.manageddiskname_rg
+}
+output "image_id" {
+  value = data.azurerm_image.image.id
 }
 
 # Create virtual machine sclae set
@@ -202,7 +205,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 }
 
 output "vm_ip" {
-  value = azurerm_public_ip.demo_public_ip.allocation_method
+  value = azurerm_public_ip.demo_public_ip.ip_address
 }
 
 output "vm_dns" {
