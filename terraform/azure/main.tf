@@ -141,7 +141,7 @@ resource "azurerm_storage_account" "demo_storage_account" {
 
 # Points to Packer build image 
 data "azurerm_image" "image" {
-  name                =  "demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
+  name                =  var.manageddiskname #"demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
   resource_group_name =  var.manageddiskname_rg
 }
 output "image_id" {
@@ -209,5 +209,5 @@ output "vm_ip" {
 }
 
 output "vm_dns" {
-  value = http://azurerm_public_ip.demo_public_ip.domain_name_label.SouthCentralUS.cloudapp.azure.com
+  value = http\://azurerm_public_ip.demo_public_ip.domain_name_label.SouthCentralUS.cloudapp.azure.com
 }
