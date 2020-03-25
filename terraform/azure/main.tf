@@ -208,6 +208,6 @@ output "vm_ip" {
   value = azurerm_public_ip.demo_public_ip.ip_address
 }
 
-output "vm_dns" {
-  value = azurerm_public_ip.demo_public_ip.domain_name_label.SouthCentralUS.cloudapp.azure.com
-}
+#output "vm_dns" {
+#  value = azurerm_public_ip.demo_public_ip.domain_name_label.SouthCentralUS.cloudapp.azure.com
+#}
