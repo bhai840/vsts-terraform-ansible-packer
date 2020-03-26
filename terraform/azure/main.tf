@@ -5,7 +5,7 @@ terraform {
 }
 
 # Configure the Microsoft Azure Provider
-provider "azurerm" {}
+provider "azurerm" { features {} }
 
 # Create a resource group if it doesn’t exist
 resource "azurerm_resource_group" "demo_resource_group" {
