@@ -140,12 +140,12 @@ resource "azurerm_storage_account" "demo_storage_account" {
 }
 
 # Points to Packer build image 
-data "azurerm_image" "search" {
-  name                =  "search-api" # var.manageddiskname #demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
-  resource_group_name =  var.manageddiskname_rg
+data "azurerm_image" "image" {
+  name                =  ${var.manageddiskname} # var.manageddiskname #demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
+  resource_group_name =  ${var.manageddiskname_rg}
 }
 output "image_id" {
-  value = data.azurerm_image.search.id
+  value = data.azurerm_image.image.id
 }
 
 # Create virtual machine sclae set
@@ -162,7 +162,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   }
 
   storage_profile_image_reference {
-    id = data.azurerm_image.search.id
+    id = data.azurerm_image.image.id
   }
 
   storage_profile_os_disk {
