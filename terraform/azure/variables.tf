@@ -6,14 +6,14 @@ variable "project" {
   default = "terraform-ansible-demo"
 }
 
-variable "manageddiskname_rg" {
-  default = "manageddiskname"    #this is the resource group where packers image resides
+variable "manageddiskname-rg" {
+  default = "manageddiskname"
 }
 
 variable "baked_image_url" {
   default = ""
 }
 
-variable "image_id" {
+variable "manageddiskname" {
   default = ""
 }
