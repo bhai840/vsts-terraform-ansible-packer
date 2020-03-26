@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.11"
+  required_version = ">= 0.12"
 
   backend "azurerm" {}
 }
@@ -141,8 +141,8 @@ resource "azurerm_storage_account" "demo_storage_account" {
 
 # Points to Packer build image 
 data "azurerm_image" "image" {
-  name_regex          =  var.image_id # var.manageddiskname #demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
-  resource_group_name =  var.manageddiskname
+  name_regex          =  demoPackerImage-formatdate("YYYY-MM-DD_hh_mm_ss", "2018-01-02T23:12:01") # var.manageddiskname #demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
+  resource_group_name =  var.manageddiskname_rg
 }
 output "image_id" {
   value = data.azurerm_image.image_id.id
