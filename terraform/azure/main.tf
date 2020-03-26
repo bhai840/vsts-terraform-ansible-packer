@@ -145,7 +145,7 @@ data "azurerm_image" "image" {
   resource_group_name =  "manageddiskname"
 }
 output "image_id" {
-  value = data.azurerm_image.image_id.id
+  value = data.azurerm_image.image.id
 }
 
 # Create virtual machine sclae set
@@ -162,7 +162,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   }
 
   storage_profile_image_reference {
-    id = data.azurerm_image.image_id.id
+    id = data.azurerm_image.image.id
   }
 
   storage_profile_os_disk {
