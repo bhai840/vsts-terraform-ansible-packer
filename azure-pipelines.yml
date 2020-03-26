@@ -15,7 +15,6 @@ steps:
     workingDirectory: 'web'
     gradleWrapperFile: 'web/gradlew'
     gradleOptions: '-Xmx3072m'
-    #javaHomeOption: 'JDKVersion'
     Set JAVA_HOME by: 'JDKVersion'
     JDK path: '/usr/lib/jvm/java-8-openjdk-amd64'
     #jdkVersionOption: '1.8'
