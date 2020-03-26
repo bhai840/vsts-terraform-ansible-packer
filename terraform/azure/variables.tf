@@ -15,5 +15,5 @@ variable "baked_image_url" {
 }
 
 variable "manageddiskname" {
-  default = ""
+  default = "demoPackerImage-2020-03-26_08_05_16"
 }
