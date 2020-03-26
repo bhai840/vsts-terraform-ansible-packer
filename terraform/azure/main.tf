@@ -141,8 +141,8 @@ resource "azurerm_storage_account" "demo_storage_account" {
 
 # Points to Packer build image 
 data "azurerm_image" "image" {
-  name_regex          =  demoPackerImage-formatdate("YYYY-MM-DD_hh_mm_ss", "2018-01-02T23:12:01") # var.manageddiskname #demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
-  resource_group_name =  var.manageddiskname_rg
+  name_regex          =  "demoPackerImage-2020-03-24_04_40_17" # var.manageddiskname #demoPackerImage-2020-03-24_04_40_17" #var.manageddiskname
+  resource_group_name =  "manageddiskname"
 }
 output "image_id" {
   value = data.azurerm_image.image_id.id
